@@ -1,0 +1,28 @@
+# importing
+
+import os
+import smtpd
+import smtplib
+from email.message import EmailMessage
+from secret import pass
+
+
+# config e-mail
+
+EMAIL_ADRESS = 'youremail@gmail.com'
+EMAIL_PASSWORD = pass   # you need to create another tab ('secret' in this case)
+and store your password like this: pass = 'yourpassword'
+
+# create e-mail
+
+msg = EmailMessage()
+msg['Subject'] = 'Carga #35 chegou ao porto'
+msg['From'] = 'youremail@gmail.com'
+msg['To'] = 'youremail@gmail.com'
+msg.set_content('Favor buscar a carga')
+
+# send e-mail
+
+with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+    smtp.login(EMAIL_ADRESS, EMAIL_PASSWORD)
+    smtp.send_message(msg)
